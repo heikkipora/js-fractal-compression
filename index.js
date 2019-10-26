@@ -1,5 +1,5 @@
 import {urlToPixels} from './image.js'
-import {findBestMatch} from './matching.js'
+import {findBestMatch, generateBlocks} from './matching.js'
 
 const workBlock = new Uint8Array(new ArrayBuffer(16))
 
@@ -17,20 +17,25 @@ async function processImage(url) {
 }
 
 async function processComponent(component, width, height) {
+  const timestamp = Date.now()
+  const blocks = generateBlocks(component, width, height)
+  const took = Date.now() - timestamp
+  console.log(`Generated ${blocks.length * 6} block variants in ${took.toFixed(0)} ms`)
+
   for (let y = 0; y < height; y += 4) {
     const timestamp = Date.now()
     for (let x = 0; x < width; x += 4) {
-      const match = await processBlock(component, x, y, width, height)
+      const match = await processBlock(component, x, y, width, blocks)
     }
     const took = Date.now() - timestamp
     console.log('milliseconds per block', took / (width >> 2))
   }  
 }
 
-async function processBlock(component, x, y, width, height) {
+async function processBlock(component, x, y, width, blocks) {
   return new Promise(resolve => {
     extractBlock(component, x, y, width, workBlock)
-    const match = findBestMatch(width, height, component, workBlock)
+    const match = findBestMatch(workBlock, blocks)
     setTimeout(() => resolve(match), 0)  
   })
 }

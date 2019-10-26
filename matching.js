@@ -10,45 +10,42 @@ import {
 const transformFunctions = [flipX, flipY, rotate0, rotate90, rotate180, rotate270]
 const workBlock = new Uint8Array(new ArrayBuffer(16))
 
-export function findBestMatch(srcWidth, srcHeight, src, targetBlock) {
-  let bestDiff = Number.POSITIVE_INFINITY
-  let bestTransform = 0
-  let bestX = 0
-  let bestY = 0
-
-  for (let y = 0; y < srcHeight - 16; y++) {
-    for (let x = 0; x < srcWidth - 16; x++) {
-      const match = findBestMatchForPosition(x, y, src, srcWidth, targetBlock)
-      if (match.bestDiff < bestDiff) {
-        bestDiff = match.bestDiff
-        bestTransform = match.bestTransform
-        bestX = x
-        bestY = y
-      }
+export function generateBlocks(src, width, height) {
+  const blocks = []
+  for (let y = 0; y < height - 8; y++) {
+    for (let x = 0; x < width - 8; x++) {
+      const v = executeTransforms(x, y, src, width)
+      blocks.push({x, y, v})
     }
   }
+  return blocks
+}
+
+function executeTransforms(x, y, src, width) {
+  return transformFunctions.map(fn => fn(x, y, src, width, new Uint8Array(new ArrayBuffer(16))))
+}
+
+export function findBestMatch(targetBlock, blocks) {
+  let bestDiff = Number.POSITIVE_INFINITY
+  let bestBlock = null;
+  let bestTransform = 0;
+
+  blocks.forEach(block => {
+    block.v.forEach((variant, transformIndex) => {
+      const diff = difference(targetBlock, variant)
+      if (diff < bestDiff) {
+        bestDiff = diff
+        bestBlock = block
+        bestTransform = transformIndex
+      }
+    })
+  })
 
   return {
     transform: bestTransform,
-    x: bestX,
-    y: bestY
+    x: bestBlock.x,
+    y: bestBlock.y
   }
-}
-
-function findBestMatchForPosition(xStart, yStart, src, srcWidth, targetBlock) {
-  let bestDiff = Number.POSITIVE_INFINITY
-  let bestTransform = 0;
-
-  for (let i = 0; i < transformFunctions.length; i++) {
-    transformFunctions[i](xStart, yStart, src, srcWidth, workBlock)
-    const diff = difference(workBlock, targetBlock)
-    if (diff < bestDiff) {
-      bestDiff = diff
-      bestTransform = i
-    }
-  }
-
-  return {bestTransform, bestDiff}
 }
 
 function difference(blockA, blockB) {
@@ -58,3 +55,4 @@ function difference(blockA, blockB) {
   }
   return sum
 }
+

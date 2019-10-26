@@ -13,6 +13,7 @@ export function flipX(xStart, yStart, src, width, dst) {
                  src[offset + width + 1] >> 2
    }
   }
+  return dst
 }
 
 export function flipY(xStart, yStart, src, width, dst) {
@@ -28,6 +29,7 @@ export function flipY(xStart, yStart, src, width, dst) {
                  src[offset + width + 1] >> 2
    }
   }
+  return dst
 }
 
 export function rotate0(xStart, yStart, src, width, dst) {
@@ -43,6 +45,7 @@ export function rotate0(xStart, yStart, src, width, dst) {
                  src[offset + width + 1] >> 2
    }
   }
+  return dst
 }
 
 export function rotate90(xStart, yStart, src, width, dst) {
@@ -58,6 +61,7 @@ export function rotate90(xStart, yStart, src, width, dst) {
                  src[offset + width + 1] >> 2
    }
   }
+  return dst
 }
 
 export function rotate180(xStart, yStart, src, width, dst) {
@@ -73,6 +77,7 @@ export function rotate180(xStart, yStart, src, width, dst) {
                  src[offset + width + 1] >> 2
    }
   }
+  return dst
 }
 
 export function rotate270(xStart, yStart, src, width, dst) {
@@ -88,6 +93,7 @@ export function rotate270(xStart, yStart, src, width, dst) {
                  src[offset + width + 1] >> 2
    }
   }
+  return dst
 }
 
 export function brighten(dst) {
