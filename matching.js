@@ -24,12 +24,12 @@ function executeTransforms(x, y, src, width) {
   return transformFunctions.map(fn => fn(x, y, src, width, new Uint8Array(new ArrayBuffer(16))))
 }
 
-export function findBestMatch(targetBlock, blocks) {
+export function findBestMatch(targetBlock, blocks, allowedError) {
   let bestDiff = Number.POSITIVE_INFINITY
   let bestBlock = null;
   let bestTransform = 0;
 
-  for(let i = 0; i < blocks.length && bestDiff > 1; i++) {
+  for(let i = 0; i < blocks.length && bestDiff > allowedError; i++) {
     var block = blocks[i]
     for(let transform = 0; transform < block.v.length; transform++) {
       var diff = difference(targetBlock, block.v[transform])
@@ -37,7 +37,7 @@ export function findBestMatch(targetBlock, blocks) {
         bestDiff = diff
         bestBlock = block
         bestTransform = transform
-        if (diff < 2) {
+        if (diff <= allowedError) {
           break;
         }
       }
@@ -45,7 +45,7 @@ export function findBestMatch(targetBlock, blocks) {
   }
 
   return {
-    transform: bestTransform,
+    t: bestTransform,
     x: bestBlock.x,
     y: bestBlock.y
   }
