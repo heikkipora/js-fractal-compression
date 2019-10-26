@@ -28,7 +28,7 @@ async function processComponent(component, width, height) {
       const match = await processBlock(component, x, y, width, blocks)
     }
     const took = Date.now() - timestamp
-    console.log('milliseconds per block', took / (width >> 2))
+    console.log(`${(y / height * 100).toFixed(1)} % complete, ${(took / (width >> 2)).toFixed(1)} ms/block`)
   }  
 }
 

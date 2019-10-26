@@ -8,7 +8,6 @@ import {
 } from './transform.js'
 
 const transformFunctions = [flipX, flipY, rotate0, rotate90, rotate180, rotate270]
-const workBlock = new Uint8Array(new ArrayBuffer(16))
 
 export function generateBlocks(src, width, height) {
   const blocks = []
@@ -30,16 +29,20 @@ export function findBestMatch(targetBlock, blocks) {
   let bestBlock = null;
   let bestTransform = 0;
 
-  blocks.forEach(block => {
-    block.v.forEach((variant, transformIndex) => {
-      const diff = difference(targetBlock, variant)
+  for(let i = 0; i < blocks.length && bestDiff > 1; i++) {
+    var block = blocks[i]
+    for(let transform = 0; transform < block.v.length; transform++) {
+      var diff = difference(targetBlock, block.v[transform])
       if (diff < bestDiff) {
         bestDiff = diff
         bestBlock = block
-        bestTransform = transformIndex
+        bestTransform = transform
+        if (diff < 2) {
+          break;
+        }
       }
-    })
-  })
+    }
+  }
 
   return {
     transform: bestTransform,
