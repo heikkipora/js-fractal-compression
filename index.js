@@ -58,9 +58,9 @@ function componentHeader(id, length) {
   return buf
 }
 
-function block({t, x, y}) {
+function block({t, o, x, y}) {
   const buf = Buffer.alloc(4)
-  const packed = t << 24 | x << 12 | y
+  const packed = o << 29 | t << 24 | x << 12 | y
   buf.writeUInt32LE(packed, 0)
   return buf
 }
