@@ -7,7 +7,7 @@ const workBlock = new Uint8Array(new ArrayBuffer(16))
 const MAGIC_MARKER = 0x46524143 // FRAC in ASCII
 
 const timestamp = Date.now()
-processImage('./example.jpg')
+processImage('./example-small.jpg')
   .then(writeFile)
   .then(() => {
     const minutes = (Date.now() - timestamp) / 1000 / 60
@@ -76,7 +76,7 @@ function processComponent(name, component, width, height) {
     const timestamp = Date.now()
     for (let x = 0; x < width; x += 4) {
       extractBlock(component, x, y, width, workBlock)
-      const match = findBestMatch(workBlock, blocks, 16)
+      const match = findBestMatch(workBlock, blocks, 8)
       matches.push(match)
     }
     const progress = y / height * 100

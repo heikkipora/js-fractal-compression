@@ -27,3 +27,25 @@ function splitToRGB(pixelData, channels) {
 
   return {r, g, b}
 }
+
+export async function pixelsToFile(r, g, b, width, height, path) {
+  const pixels = mergeToRGB(r, g, b)
+  await saveImage(pixels, width, height, path)
+}
+
+function saveImage(pixels, width, height, path) {
+  const options = {raw: {width, height, channels: 3}}
+  return sharp(pixels, options)
+    .jpeg({quality: 90})
+    .toFile(path)
+}
+
+function mergeToRGB(r, g, b) {
+  var pixels = Buffer.alloc(r.length * 3);
+  for(let i = 0; i < r.length ; i++) {
+    pixels[i * 3] = r[i]
+    pixels[i * 3 + 1] = g[i]
+    pixels[i * 3 + 2] = b[i]
+  }
+  return pixels
+}

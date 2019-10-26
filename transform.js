@@ -1,6 +1,8 @@
 // Functions to scale an 8 x 8 pixel block down to 4 x 4 while flipping or rotating it
 
-export function flipX(xStart, yStart, src, width, dst) {
+export const transformFunctions = [flipX, flipY, rotate0, rotate90, rotate180, rotate270]
+
+function flipX(xStart, yStart, src, width, dst) {
   let i = 0
   const xEnd = xStart + 6
   const yEnd = yStart + 8
@@ -16,7 +18,7 @@ export function flipX(xStart, yStart, src, width, dst) {
   return dst
 }
 
-export function flipY(xStart, yStart, src, width, dst) {
+function flipY(xStart, yStart, src, width, dst) {
   let i = 0
   const xEnd = xStart + 8
   const yEnd = yStart + 6
@@ -32,7 +34,7 @@ export function flipY(xStart, yStart, src, width, dst) {
   return dst
 }
 
-export function rotate0(xStart, yStart, src, width, dst) {
+function rotate0(xStart, yStart, src, width, dst) {
   let i = 0
   const xEnd = xStart + 8
   const yEnd = yStart + 8
@@ -48,7 +50,7 @@ export function rotate0(xStart, yStart, src, width, dst) {
   return dst
 }
 
-export function rotate90(xStart, yStart, src, width, dst) {
+function rotate90(xStart, yStart, src, width, dst) {
   let i = 0
   const xEnd = xStart + 8
   const yEnd = yStart + 6
@@ -64,7 +66,7 @@ export function rotate90(xStart, yStart, src, width, dst) {
   return dst
 }
 
-export function rotate180(xStart, yStart, src, width, dst) {
+function rotate180(xStart, yStart, src, width, dst) {
   let i = 0
   const xEnd = xStart + 6
   const yEnd = yStart + 6
@@ -80,7 +82,7 @@ export function rotate180(xStart, yStart, src, width, dst) {
   return dst
 }
 
-export function rotate270(xStart, yStart, src, width, dst) {
+function rotate270(xStart, yStart, src, width, dst) {
   let i = 0
   const xEnd = xStart + 6
   const yEnd = yStart + 8
@@ -94,16 +96,4 @@ export function rotate270(xStart, yStart, src, width, dst) {
    }
   }
   return dst
-}
-
-export function brighten(dst) {
-  for (let i = 0; i < 16; i++) {
-    dst[i] = dst[i] * value >> 8
-  }
-}
-
-export function brightess(dst) {
-  for (let i = 0; i < 16; i++) {
-    dst[i] = dst[i] * value >> 8
-  }
 }

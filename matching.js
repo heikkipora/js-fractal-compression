@@ -1,13 +1,4 @@
-import {
-  flipX,
-  flipY,
-  rotate0,
-  rotate90,
-  rotate180,
-  rotate270
-} from './transform.js'
-
-const transformFunctions = [flipX, flipY, rotate0, rotate90, rotate180, rotate270]
+import {transformFunctions} from './transform.js'
 
 export function generateBlocks(src, width, height) {
   const blocks = []
@@ -85,7 +76,7 @@ function difference(blockA, blockB) {
 function differenceDarken(blockA, blockB) {
   let sum = 0
   for (let i = 0; i < 16; i++) {
-    sum += Math.abs(blockA[i] - Math.min(blockB[i] - 8, 0))
+    sum += Math.abs(blockA[i] - Math.min(blockB[i] - 16, 0))
   }
   return sum
 }
@@ -93,7 +84,7 @@ function differenceDarken(blockA, blockB) {
 function differenceLighten(blockA, blockB) {
   let sum = 0
   for (let i = 0; i < 16; i++) {
-    sum += Math.abs(blockA[i] - Math.max(blockB[i] + 8, 255))
+    sum += Math.abs(blockA[i] - Math.max(blockB[i] + 16, 255))
   }
   return sum
 }
