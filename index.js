@@ -1,4 +1,5 @@
 import fs from 'fs'
+import {extractBlock} from './block.js'
 import {fileToPixels} from './image.js'
 import {findBestMatch} from './matching.js'
 import {generateBlocks} from './catalog.js'
@@ -86,15 +87,4 @@ function processComponent(name, component, width, height) {
   }
 
   return matches
-}
-
-function extractBlock(src, xStart, yStart, width, dst) {
-  let i = 0
-  const xEnd = xStart + 4
-  const yEnd = yStart + 4
-  for (let y = yStart; y < yEnd; y++) {
-    for (let x = xStart; x < xEnd; x++) {
-      dst[i++] = src[y * width + x]
-    }
-  }
 }
