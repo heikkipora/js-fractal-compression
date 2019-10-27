@@ -1,18 +1,6 @@
 import {expect} from 'chai'
+import {TEST_IMAGE, TEST_IMAGE_WIDTH} from './fixture/image.js'
 import {transformFunctions} from '../transform.js'
-
-const sourceImage = new Uint8Array([
-  99,  99,  99,  99,  99,  99,  99,  99,  99, 99,
-  99,   0,   1,  10,  11,  20,  21,  30,  31, 99,
-  99,   2,   3,  12,  13,  22,  23,  32,  33, 99,
-  99,  40,  41,  50,  51,  60,  61,  70,  71, 99,
-  99,  42,  43,  52,  53,  62,  63,  72,  73, 99,
-  99,  80,  81,  90,  91, 100, 101, 110, 111, 99,
-  99,  82,  83,  92,  93, 102, 103, 112, 113, 99,
-  99, 120, 121, 130, 131, 140, 141, 150, 151, 99,
-  99, 122, 123, 132, 133, 142, 143, 152, 153, 99,
-  99,  99,  99,  99,  99,  99,  99,  99,  99, 99,
-])
 
 describe('Transform functions', () => {
   it('Should flip a block horizontally and scale it down 50% with transform #1', () => {
@@ -72,6 +60,6 @@ describe('Transform functions', () => {
 
 function expectTransformed(index, arr) {
   const workBlock = new Uint8Array(new ArrayBuffer(16))    
-  transformFunctions[index](1, 1, sourceImage, 10, workBlock)
+  transformFunctions[index](1, 1, TEST_IMAGE, TEST_IMAGE_WIDTH, workBlock)
   expect(Array.from(workBlock)).to.deep.equal(arr)
 }
