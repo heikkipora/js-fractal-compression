@@ -47,9 +47,9 @@ function componentHeader(buf, offset) {
 
 function block(buf, offset) {
   const packed = buf.readUInt32LE(offset)
-  const o = packed & 0x60000000 >> 29
-  const t = packed & 0x01F00000 >> 24
-  const x = packed & 0x00FFF000 >> 12
+  const o = (packed & 0x60000000) >> 29
+  const t = (packed & 0x1F000000) >> 24
+  const x = (packed & 0x00FFF000) >> 12
   const y = packed & 0x00000FFF
   return {t, o, x, y}
 }
