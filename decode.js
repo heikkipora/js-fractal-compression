@@ -1,10 +1,8 @@
-import fs from 'fs'
 import {pixelsToFile} from './image.js'
+import {readFile} from './file-read'
 import {transformFunctions} from './transform.js'
 
 const workBlock = new Uint8Array(new ArrayBuffer(16))
-
-const MAGIC_MARKER = 0x46524143 // FRAC in ASCII
 
 const timestamp = Date.now()
 readFile('./example-small.jpg.fractal')
@@ -20,59 +18,6 @@ async function processImage({r, g, b, width, height}) {
   const gPixels = processComponent(g, width, height)
   const bPixels = processComponent(b, width, height)
   await pixelsToFile(rPixels, gPixels, bPixels, width, height, './example-small-output.jpg')
-}
-
-async function readFile(path) {
-  const buf = await fs.promises.readFile(path)
-  let offset = 0
-  const {marker, width, height} = header(buf, offset)
-  offset += 8
-  if (marker !== MAGIC_MARKER) {
-    throw new Error('Uknown file type, marker not found')
-  }
-
-  const r = component(buf, offset, 0xFF0000)
-  offset += r.length * 4 + 8
-  const g = component(buf, offset, 0x00FF00)
-  offset += g.length * 4 + 8
-  const b = component(buf, offset, 0x0000FF)
-  offset += b.length * 4 + 8
-
-  return {r, g, b, width, height}
-}
-
-function header(buf, offset) {
-  const marker = buf.readUInt32LE(offset)
-  const width = buf.readUInt16LE(offset + 4)
-  const height = buf.readUInt16LE(offset + 6)
-  return {marker, width, height}
-}
-
-function component(buf, offset, expectedId) {
-  const {id, length} = componentHeader(buf, offset)
-  if (id !== expectedId) {
-    throw new Error('File parsing failed, unkown component header id ' + expectedId)
-  }
-  const blocks = []
-  for (let i = 0; i < length; i++) {
-    blocks.push(block(buf, offset + 8 + i * 4))
-  }
-  return blocks
-}
-
-function componentHeader(buf, offset) {
-  const id = buf.readUInt32LE(offset)
-  const length = buf.readUInt32LE(offset + 4)
-  return {id, length}
-}
-
-function block(buf, offset) {
-  const packed = buf.readUInt32LE(offset)
-  const o = packed & 0x60000000 >> 29
-  const t = packed & 0x01F00000 >> 24
-  const x = packed & 0x00FFF000 >> 12
-  const y = packed & 0x00000FFF
-  return {t, o, x, y}
 }
 
 function processComponent(component, width, height) {

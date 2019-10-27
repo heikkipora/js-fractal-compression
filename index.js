@@ -1,16 +1,14 @@
-import fs from 'fs'
 import {extractBlock} from './block.js'
 import {fileToPixels} from './image.js'
 import {findBestMatch} from './matching.js'
 import {generateBlocks} from './catalog.js'
+import {writeFile} from './file-write'
 
 const workBlock = new Uint8Array(new ArrayBuffer(16))
 
-const MAGIC_MARKER = 0x46524143 // FRAC in ASCII
-
 const timestamp = Date.now()
 processImage('./example-small.jpg')
-  .then(writeFile)
+  .then(processed => writeFile(processed, './example-small.fractal'))
   .then(() => {
     const minutes = (Date.now() - timestamp) / 1000 / 60
     console.log(`Complete, took ${minutes.toFixed(1)} minutes`)
@@ -27,44 +25,6 @@ async function processImage(path) {
      height,
      path
   }
-}
-
-async function writeFile({r, g, b, width, height, path}) {
-  const out = fs.createWriteStream(`${path}.fractal`)
-  out.write(header(width, height))
-
-  out.write(componentHeader(0xFF0000, r.length))
-  r.forEach(m => out.write(block(m)))
-
-  out.write(componentHeader(0x00FF00, g.length))
-  g.forEach(m => out.write(block(m)))
-
-  out.write(componentHeader(0x0000FF, b.length))
-  b.forEach(m => out.write(block(m)))
-
-  out.close()
-}
-
-function header(width, height) {
-  const buf = Buffer.alloc(8)
-  buf.writeUInt32LE(MAGIC_MARKER, 0)
-  buf.writeUInt16LE(width, 4)
-  buf.writeUInt16LE(height, 6)
-  return buf
-}
-
-function componentHeader(id, length) {
-  const buf = Buffer.alloc(8)
-  buf.writeUInt32LE(id, 0)
-  buf.writeUInt32LE(length, 4)
-  return buf
-}
-
-function block({t, o, x, y}) {
-  const buf = Buffer.alloc(4)
-  const packed = o << 29 | t << 24 | x << 12 | y
-  buf.writeUInt32LE(packed, 0)
-  return buf
 }
 
 function processComponent(name, component, width, height) {
