@@ -4,11 +4,17 @@
   "private": true,
   "scripts": {
     "start": "node --experimental-modules index.js",
-    "decode": "node --experimental-modules decode.js"
+    "decode": "node --experimental-modules decode.js",
+    "test": "mocha --require esm test/*.js"
   },
   "license": "MIT",
   "dependencies": {
     "sharp": "0.23.1"
+  },
+  "devDependencies": {
+    "chai": "4.2.0",
+    "esm": "3.2.25",
+    "mocha": "6.2.2"
   },
   "type": "module",
   "engines": {
