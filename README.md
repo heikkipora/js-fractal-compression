@@ -40,3 +40,16 @@ The table below illustrates the twelve first iterations decoding ```examples/hel
 ## Pre-requisites
 
 - Node.js v12.13.0 or newer
+
+## Installation
+
+```npm install```
+
+## Test execution with mocha
+
+```npm test```
+
+## Running
+
+- ```bin/encode <input-image> <output-file>```
+- ```bin/decode <input-file> <output-image> [iterations]```
