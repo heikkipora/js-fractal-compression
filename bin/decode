@@ -4,13 +4,13 @@ import {decodeImage} from '../lib/decoder.js'
 import {pixelsToFile} from '../lib/image.js'
 import {readFile} from '../lib/file-read.js'
 
-const {2: inFile, 3: outFile} = process.argv
+const {2: inFile, 3: outFile, 4: iterations} = process.argv
 if (!inFile || !outFile) {
-  console.log('Usage: decode <input-file> <output-image>')
+  console.log('Usage: decode <input-file> <output-image> [iterations]')
   process.exit(1)
 }
 
-decodeFileToFile(inFile, outFile, 16)
+decodeFileToFile(inFile, outFile, Number(iterations || 16))
   .then(() => console.log('Completed'))
   .catch(console.error)
 
