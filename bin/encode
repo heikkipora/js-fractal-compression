@@ -4,7 +4,13 @@ import {encodeImage} from '../lib/encoder.js'
 import {fileToPixels} from '../lib/image.js'
 import {writeFile} from '../lib/file-write.js'
 
-encodeFileToFile('./example-small.jpg', './example-small.fractal', 4)
+const {2: inFile, 3: outFile} = process.argv
+if (!inFile || !outFile) {
+  console.log('Usage: encode <input-image> <output-file>')
+  process.exit(1)
+}
+
+encodeFileToFile(inFile, outFile, 4)
   .then(() => console.log('Completed'))
   .catch(console.error)
 
