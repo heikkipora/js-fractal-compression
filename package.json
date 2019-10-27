@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "test": "mocha --require esm test/*.js"
+    "test": "mocha --require esm test/*-test.js"
   },
   "license": "MIT",
   "dependencies": {
