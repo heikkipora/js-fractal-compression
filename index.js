@@ -1,6 +1,7 @@
 import fs from 'fs'
 import {fileToPixels} from './image.js'
-import {findBestMatch, generateBlocks} from './matching.js'
+import {findBestMatch} from './matching.js'
+import {generateBlocks} from './catalog.js'
 
 const workBlock = new Uint8Array(new ArrayBuffer(16))
 
