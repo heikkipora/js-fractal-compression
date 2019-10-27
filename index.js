@@ -2,7 +2,7 @@ import {extractBlock} from './block.js'
 import {fileToPixels} from './image.js'
 import {findBestMatch} from './matching.js'
 import {generateBlocks} from './catalog.js'
-import {writeFile} from './file-write'
+import {writeFile} from './file-write.js'
 
 const workBlock = new Uint8Array(new ArrayBuffer(16))
 

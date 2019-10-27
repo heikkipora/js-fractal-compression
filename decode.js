@@ -1,5 +1,5 @@
 import {pixelsToFile} from './image.js'
-import {readFile} from './file-read'
+import {readFile} from './file-read.js'
 import {transformFunctions} from './transform.js'
 
 const workBlock = new Uint8Array(new ArrayBuffer(16))
