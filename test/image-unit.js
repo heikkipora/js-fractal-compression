@@ -14,6 +14,7 @@ describe('Image loading and saving', () => {
     expect(g).to.have.lengthOf(256 * 256)
     expect(b).to.have.lengthOf(256 * 256)
     await pixelsToFile(r, g, b, width, height, OUTPUT_FILE)
-    await fs.promises.unlink(OUTPUT_FILE)
   })
+
+  after(() => fs.promises.unlink(OUTPUT_FILE))
 })
