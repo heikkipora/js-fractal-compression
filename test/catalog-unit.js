@@ -1,7 +1,7 @@
 import {expect} from 'chai'
-import {generateCatalog} from '../catalog.js'
+import {generateCatalog} from '../src/catalog.js'
 import {TEST_IMAGE, TEST_IMAGE_HEIGHT, TEST_IMAGE_WIDTH} from './fixture/image.js'
-import {transformFunctions} from '../transform.js'
+import {transformFunctions} from '../src/transform.js'
 
 describe('Catalog generation', () => {
   it('Should generate all block variants for all possible positions', () => {

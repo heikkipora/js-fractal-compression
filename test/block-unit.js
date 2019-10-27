@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {extractBlock} from '../block.js'
+import {extractBlock} from '../src/block.js'
 import {TEST_IMAGE, TEST_IMAGE_WIDTH} from './fixture/image.js'
 
 describe('Block extraction', () => {

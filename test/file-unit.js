@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 import fs from 'fs'
-import {readFile} from '../file-read.js'
-import {writeFile} from '../file-write.js'
+import {readFile} from '../src/file-read.js'
+import {writeFile} from '../src/file-write.js'
 
 const OUTPUT_FILE = `${__dirname}/../test.fractal`
 
