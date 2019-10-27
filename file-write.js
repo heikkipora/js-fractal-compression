@@ -32,7 +32,7 @@ function componentHeader(id, length) {
   return buf
 }
 
-function block({t, o, x, y}) {
+function block({t, b, c, x, y}) {
   if (x >= 4096) {
     throw Error(`X value ${x}s overflows 12 bits`)
   }
@@ -42,13 +42,11 @@ function block({t, o, x, y}) {
   if (t >= 32) {
     throw Error(`T value ${t}s overflows 5 bits`)
   }
-  if (o >= 4) {
-    throw Error(`O value ${t}s overflows 2 bits`)
-  }
-
-  const buf = Buffer.alloc(4)
-  const packed = o << 29 | t << 24 | x << 12 | y
+  const buf = Buffer.alloc(6)
+  const packed = t << 24 | x << 12 | y
   buf.writeUInt32LE(packed, 0)
+  buf.writeInt8(Math.round(b / 2), 4)
+  buf.writeUInt8(c, 5)
   return buf
 }
 

@@ -7,8 +7,8 @@ import {writeFile} from './file-write.js'
 const workBlock = new Uint8Array(new ArrayBuffer(16))
 
 const timestamp = Date.now()
-processImage('./example-small.jpg')
-  .then(processed => writeFile(processed, './example-small.fractal'))
+processImage('./forest.jpg')
+  .then(processed => writeFile(processed, './fores.fractal'))
   .then(() => {
     const minutes = (Date.now() - timestamp) / 1000 / 60
     console.log(`Complete, took ${minutes.toFixed(1)} minutes`)

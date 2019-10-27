@@ -11,11 +11,11 @@ export async function readFile(path) {
   }
 
   const r = component(buf, offset, RED_COMPONENT)
-  offset += r.length * 4 + 8
+  offset += r.length * 6 + 8
   const g = component(buf, offset, GREEN_COMPONENT)
-  offset += g.length * 4 + 8
+  offset += g.length * 6 + 8
   const b = component(buf, offset, BLUE_COMPONENT)
-  offset += b.length * 4 + 8
+  offset += b.length * 6 + 8
 
   return {r, g, b, width, height}
 }
@@ -30,11 +30,11 @@ function header(buf, offset) {
 function component(buf, offset, expectedId) {
   const {id, length} = componentHeader(buf, offset)
   if (id !== expectedId) {
-    throw new Error('File parsing failed, unkown component header id ' + expectedId)
+    throw new Error(`File parsing failed, unkown component header id ${id}, expected ${expectedId}`)
   }
   const blocks = []
   for (let i = 0; i < length; i++) {
-    blocks.push(block(buf, offset + 8 + i * 4))
+    blocks.push(block(buf, offset + 8 + i * 6))
   }
   return blocks
 }
@@ -47,9 +47,10 @@ function componentHeader(buf, offset) {
 
 function block(buf, offset) {
   const packed = buf.readUInt32LE(offset)
-  const o = (packed & 0x60000000) >> 29
   const t = (packed & 0x1F000000) >> 24
   const x = (packed & 0x00FFF000) >> 12
   const y = packed & 0x00000FFF
-  return {t, o, x, y}
+  const b = buf.readInt8(offset + 4) * 2
+  const c = buf.readUInt8(offset + 5)
+  return {t, b, c, x, y}
 }

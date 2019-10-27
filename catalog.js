@@ -2,8 +2,8 @@ import {transformFunctions} from './transform.js'
 
 export function generateBlocks(src, width, height) {
   const blocks = []
-  for (let y = 0; y <= height - 8; y++) {
-    for (let x = 0; x <= width - 8; x++) {
+  for (let y = 0; y <= height - 8; y += 8) {
+    for (let x = 0; x <= width - 8; x += 8) {
       const v = executeTransforms(x, y, src, width)
       blocks.push({x, y, v})
     }
