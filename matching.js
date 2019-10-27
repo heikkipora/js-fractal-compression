@@ -4,8 +4,8 @@ export function findBestMatch(targetBlock, blocks, allowedError) {
 
   for(let i = 0; i < blocks.length && bestDiff > allowedError; i++) {
     const block = blocks[i]
-    for(let transform = 0; transform < block.v.length; transform++) {
-      const {difference, brightness, contrast} = adjustedDifference(targetBlock, block.v[transform])
+    for(let transform = 0; transform < block.variants.length; transform++) {
+      const {difference, brightness, contrast} = adjustedDifference(targetBlock, block.variants[transform])
       if (difference < bestDiff) {
         bestDiff = difference
         bestMatch = {

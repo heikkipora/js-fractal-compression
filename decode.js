@@ -5,7 +5,7 @@ import {transformFunctions} from './transform.js'
 const workBlock = new Uint8ClampedArray(new ArrayBuffer(16))
 
 const timestamp = Date.now()
-readFile('./forest.fractal')
+readFile('./example.fractal')
   .then(processImage)
   .then(() => {
     const minutes = (Date.now() - timestamp) / 1000 / 60
@@ -17,16 +17,16 @@ async function processImage({r, g, b, width, height}) {
   const rPixels = processComponent(r, width, height)
   const gPixels = processComponent(g, width, height)
   const bPixels = processComponent(b, width, height)
-  await pixelsToFile(rPixels, gPixels, bPixels, width, height, './forest-output.jpg')
+  await pixelsToFile(rPixels, gPixels, bPixels, width, height, './example-output.jpg')
 }
 
 function processComponent(component, width, height) {
   let to = new Uint8Array(new ArrayBuffer(width * height))
   let from = new Uint8Array(new ArrayBuffer(width * height))
   for (let i = 0; i < width * height; i++) {
-    from[i] = Math.floor(Math.random() * 255)
+    from[i] = 0
   }
-  for(let iteration = 0; iteration < 20; iteration++) {
+  for(let iteration = 0; iteration < 8; iteration++) {
     processIteration(component, to, from, width, height)
     const swap = to
     to = from
