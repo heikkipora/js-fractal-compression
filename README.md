@@ -56,4 +56,4 @@ The table below illustrates the twelve first iterations decoding ```examples/hel
 - ```bin/encode <input-image> <output-file>```
 - ```bin/decode <input-file> <output-image> [iterations]```
 
-Format of input and output images is determined automatically by ```sharp```.
+Format of input and output images is determined automatically by ```sharp```. The default number of iterations is 16 which should be enough for all uses.
