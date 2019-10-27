@@ -1,0 +1,15 @@
+#!/usr/bin/env node --experimental-modules
+
+import {decodeImage} from '../lib/decoder.js'
+import {pixelsToFile} from '../lib/image.js'
+import {readFile} from '../lib/file-read.js'
+
+decodeFileToFile('./example-small.fractal', './example-small.output.jpg', 16)
+  .then(() => console.log('Completed'))
+  .catch(console.error)
+
+async function decodeFileToFile(srcPath, dstPath, iterations) {
+  const {r, g, b, width, height} = await readFile(srcPath)
+  const decoded = decodeImage(r, g, b, width, height, iterations)
+  await pixelsToFile(decoded.r, decoded.g, decoded.b, width, height, dstPath)
+}

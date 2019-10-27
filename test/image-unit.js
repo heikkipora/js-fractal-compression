@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {fileToPixels, pixelsToFile} from '../src/image.js'
+import {fileToPixels, pixelsToFile} from '../lib/image.js'
 import fs from 'fs'
 
 const INPUT_FILE = `${__dirname}/../example-small.jpg`

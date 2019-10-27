@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 import fs from 'fs'
-import {readFile} from '../src/file-read.js'
-import {writeFile} from '../src/file-write.js'
+import {readFile} from '../lib/file-read.js'
+import {writeFile} from '../lib/file-write.js'
 
 const OUTPUT_FILE = `${__dirname}/../test.fractal`
 
@@ -22,9 +22,9 @@ describe('File operations', () => {
 
   it('Should be able to load a file that it created, describing an image with some data', async () => {
     const input = {
-      r: [{b: 0, c: 192, t: 1, x: 1200, y: 30}, {b: -80, c: 192, t: 2, x: 255, y: 3000}],
-      g: [{b: -127, c: 192, t: 0, x: 0, y: 1000}, {b: 127, c: 192, t: 4, x: 7, y: 4000}],
-      b: [{b: 120, c: 192, t: 5, x: 120, y: 100}, {b: 100, c: 192, t: 0, x: 2999, y: 0}],
+      r: [{brightness: 0, transform: 1, x: 72, y: 32}, {brightness: -80, transform: 2, x: 128, y: 512}],
+      g: [{brightness: -255, transform: 0, x: 0, y: 832}, {brightness: 255, transform: 4, x: 0, y: 16}],
+      b: [{brightness: 120, transform: 5, x: 1600, y: 104}, {brightness: 100, transform: 0, x: 80, y: 1024}],
       width: 1280,
       height: 670,
     }
