@@ -41,7 +41,7 @@ The table below illustrates the twelve first iterations decoding ```examples/hel
 
 ## Pre-requisites
 
-- Node.js v12.13.0 or newer
+- Node.js v14.5.0 or newer
 
 ## Installation
 
@@ -53,7 +53,7 @@ The table below illustrates the twelve first iterations decoding ```examples/hel
 
 ## Running
 
-- ```bin/encode <input-image> <output-file>```
-- ```bin/decode <input-file> <output-image> [iterations]```
+- ```bin/encode.js <input-image> <output-file>```
+- ```bin/decode.js <input-file> <output-image> [iterations]```
 
 Format of input and output images is determined automatically by ```sharp```. The default number of iterations is 16 which should be enough for all uses.

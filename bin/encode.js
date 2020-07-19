@@ -1,4 +1,4 @@
-#!/usr/bin/env node --experimental-modules
+#!/usr/bin/env node
 
 import {encodeImage} from '../lib/encoder.js'
 import {fileToPixels} from '../lib/image.js'
