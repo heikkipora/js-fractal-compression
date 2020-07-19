@@ -1,9 +1,11 @@
-import {expect} from 'chai'
+import chai from 'chai'
 import {fileToPixels, pixelsToFile} from '../lib/image.js'
 import fs from 'fs'
 
-const INPUT_FILE = `${__dirname}/../examples/hedgehog.jpg`
-const OUTPUT_FILE = `${__dirname}/test-output.jpg`
+const {expect} = chai
+
+const INPUT_FILE = 'examples/hedgehog.jpg'
+const OUTPUT_FILE = 'test/test-output.jpg'
 
 describe('Image loading and saving', () => {
   it('Should load an image split to three channels, and merge those back when saving', async () => {

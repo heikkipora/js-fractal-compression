@@ -1,6 +1,8 @@
-import {expect} from 'chai'
+import chai from 'chai'
 import {TEST_IMAGE, TEST_IMAGE_WIDTH} from './fixture/image.js'
 import {transformFunctions} from '../lib/transform.js'
+
+const {expect} = chai
 
 describe('Transform functions', () => {
   it('Should flip a block horizontally and scale it down 50% with transform #1', () => {

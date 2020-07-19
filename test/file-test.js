@@ -1,9 +1,11 @@
-import {expect} from 'chai'
+import chai from 'chai'
 import fs from 'fs'
 import {readFile} from '../lib/file-read.js'
 import {writeFile} from '../lib/file-write.js'
 
-const OUTPUT_FILE = `${__dirname}/../test.fractal`
+const {expect} = chai
+
+const OUTPUT_FILE = 'test/test.fractal'
 
 describe('File operations', () => {
   it('Should be able to load a file that it created, describing an empty image', async () => {
