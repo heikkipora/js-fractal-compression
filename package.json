@@ -1,17 +1,17 @@
 {
   "name": "js-fractal-compression",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "test": "mocha test/*-test.js"
   },
   "license": "MIT",
   "dependencies": {
-    "sharp": "0.27.0"
+    "sharp": "0.27.2"
   },
   "devDependencies": {
-    "chai": "4.2.0",
-    "mocha": "8.2.1"
+    "chai": "4.3.0",
+    "mocha": "8.3.0"
   },
   "type": "module",
   "engines": {
