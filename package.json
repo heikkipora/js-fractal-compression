@@ -15,6 +15,6 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=14.16.0"
+    "node": ">=16.0"
   }
 }
