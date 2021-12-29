@@ -41,7 +41,7 @@ The table below illustrates the twelve first iterations decoding ```examples/hel
 
 ## Pre-requisites
 
-- Node.js v14.5.0 or newer
+- Node.js v16 or newer
 
 ## Installation
 
