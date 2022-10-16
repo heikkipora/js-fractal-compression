@@ -7,11 +7,11 @@
   },
   "license": "MIT",
   "dependencies": {
-    "sharp": "0.29.3"
+    "sharp": "0.31.1"
   },
   "devDependencies": {
     "chai": "4.3.6",
-    "mocha": "9.2.0"
+    "mocha": "10.1.0"
   },
   "type": "module",
   "engines": {
