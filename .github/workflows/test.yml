@@ -1,26 +1,18 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests
 name: Run tests
 
-on:
-  push:
-    branches: [master]
-  pull_request:
-    branches: [master]
-
-  workflow_dispatch:
+on: [push, pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [16.x, 18.x]
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm audit
-      - run: npm test
+     - uses: actions/checkout@v2
+     - uses: actions/setup-node@v1
+       with:
+         node-version: ${{ matrix.node-version }}
+     - run: npm ci
+     - run: npm audit
+     - run: npm test
