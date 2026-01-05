@@ -11,7 +11,7 @@ Note that I have prioritized performance and encoding efficiency over code beaut
 
 A nice writeup of a similar implementation (in python & numpy) by *pvigier* is here: https://pvigier.github.io/2018/05/14/fractal-image-compression.html
 
-[![build status](https://travis-ci.org/heikkipora/js-fractal-compression.svg?branch=master)](https://travis-ci.org/heikkipora/js-fractal-compression)
+![Run tests](https://github.com/heikkipora/js-fractal-compression/workflows/Run%20tests/badge.svg)
 
 ## Example images
 
