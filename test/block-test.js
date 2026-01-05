@@ -1,8 +1,6 @@
-import chai from 'chai'
+import {expect} from 'chai'
 import {extractBlock} from '../lib/encoder.js'
 import {TEST_IMAGE, TEST_IMAGE_WIDTH} from './fixture/image.js'
-
-const {expect} = chai
 
 describe('Block extraction', () => {
   it('Should produce a linear data block from a larger image', () => {

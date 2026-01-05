@@ -1,9 +1,7 @@
-import chai from 'chai'
+import {expect} from 'chai'
 import fs from 'fs'
 import {readFile} from '../lib/file-read.js'
 import {writeFile} from '../lib/file-write.js'
-
-const {expect} = chai
 
 const OUTPUT_FILE = 'test/test.fractal'
 

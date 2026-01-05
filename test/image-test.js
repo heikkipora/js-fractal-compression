@@ -1,8 +1,6 @@
-import chai from 'chai'
+import {expect} from 'chai'
 import {fileToPixels, pixelsToFile} from '../lib/image.js'
 import fs from 'fs'
-
-const {expect} = chai
 
 const INPUT_FILE = 'examples/hedgehog.jpg'
 const OUTPUT_FILE = 'test/test-output.jpg'
