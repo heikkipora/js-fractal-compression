@@ -1,4 +1,5 @@
-import {expect} from 'chai'
+import {describe, it, after} from 'node:test'
+import assert from 'node:assert/strict'
 import fs from 'fs'
 import {readFile} from '../lib/file-read.js'
 import {writeFile} from '../lib/file-write.js'
@@ -17,7 +18,7 @@ describe('File operations', () => {
     await writeFile(input, OUTPUT_FILE)
     const output = await readFile(OUTPUT_FILE)
 
-    expect(output).to.deep.equal(input)
+    assert.deepEqual(output, input)
   })
 
   it('Should be able to load a file that it created, describing an image with some data', async () => {
@@ -31,7 +32,7 @@ describe('File operations', () => {
     await writeFile(input, OUTPUT_FILE)
     const output = await readFile(OUTPUT_FILE)
 
-    expect(output).to.deep.equal(input)
+    assert.deepEqual(output, input)
   })
 
   after(() => fs.promises.unlink(OUTPUT_FILE))

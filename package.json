@@ -3,15 +3,11 @@
   "version": "1.0.1",
   "private": true,
   "scripts": {
-    "test": "mocha test/*-test.js"
+    "test": "node --test --test-concurrency=1 test/*-test.js"
   },
   "license": "MIT",
   "dependencies": {
     "sharp": "0.34.5"
-  },
-  "devDependencies": {
-    "chai": "6.2.2",
-    "mocha": "11.7.5"
   },
   "type": "module",
   "engines": {

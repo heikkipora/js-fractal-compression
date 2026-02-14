@@ -1,4 +1,5 @@
-import {expect} from 'chai'
+import {describe, it} from 'node:test'
+import assert from 'node:assert/strict'
 import {TEST_IMAGE, TEST_IMAGE_WIDTH} from './fixture/image.js'
 import {transformFunctions} from '../lib/transform.js'
 
@@ -59,7 +60,7 @@ describe('Transform functions', () => {
 })
 
 function expectTransformed(index, arr) {
-  const workBlock = new Uint8Array(new ArrayBuffer(16))    
+  const workBlock = new Uint8Array(new ArrayBuffer(16))
   transformFunctions[index](1, 1, TEST_IMAGE, TEST_IMAGE_WIDTH, workBlock)
-  expect(Array.from(workBlock)).to.deep.equal(arr)
+  assert.deepEqual(Array.from(workBlock), arr)
 }
