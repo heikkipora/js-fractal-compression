@@ -9,6 +9,8 @@ I was intrigued by the beauty of the idea (of fractal compression) then and stil
 A weekend of coding resulted in this simplistic implementation which still produces visually appealing results.
 Note that I have prioritized performance and encoding efficiency over code beauty (such as functional paradigms).
 
+*2026 UPDATE*: Seven years after this project was born, LLMs - and more specifically Claude Fable 5 - are here, so that is what I used to overhaul the encoder for a hefty speedup. The example images now encode in a couple of seconds instead of minutes.
+
 A nice writeup of a similar implementation (in python & numpy) by *pvigier* is here: https://pvigier.github.io/2018/05/14/fractal-image-compression.html
 
 ![Run tests](https://github.com/heikkipora/js-fractal-compression/actions/workflows/test.yml/badge.svg)
