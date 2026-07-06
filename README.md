@@ -22,8 +22,6 @@ A nice writeup of a similar implementation (in python & numpy) by *pvigier* is h
 | <img src="https://raw.github.com/heikkipora/js-fractal-compression/master/examples/hedgehog.jpg" width="400"/> | <img src="https://raw.github.com/heikkipora/js-fractal-compression/master/examples/hedgehog.decoded.jpg" width="400"/> |
 | ```bin/encode examples/hedgehog.jpg examples/hedgehog.fractal``` | ```bin/decode examples/hedgehog.fractal examples/hedgehog.decoded.jpg``` |
 
-Note that it takes several minutes to encode the images.
-
 ## Decoding process visualized
 
 The decoding process applies a set of block transformations determined in encoding phase (and stored in the .fractal file) on top of an image (any image, a blank one, one with random pixels, anything goes).
