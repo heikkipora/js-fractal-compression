@@ -55,3 +55,30 @@ The table below illustrates the twelve first iterations decoding ```examples/hel
 - ```bin/decode <input-file> <output-image> [iterations]```
 
 Format of input and output images is determined automatically by ```sharp```. The default number of iterations is 16 which should be enough for all uses.
+
+## How it works
+
+The idea of fractal compression is to express every small block of an image as a transformed copy of some larger block found elsewhere in the same image - and store only the recipe of copies instead of any pixels.
+
+### Encoding
+
+Each color channel (red, green, blue) is encoded separately with the same algorithm:
+
+1. A catalog of candidate blocks is built first: every 8 x 8 pixel block aligned on an 8-pixel grid is scaled down to 4 x 4 (by averaging 2 x 2 pixel cells) in six variants - flipped horizontally, flipped vertically, as-is, and rotated by 90°, 180° and 270°.
+2. Every variant is classified by the brightness ranking of its four quadrants into one of 24 classes. The ranking doesn't change when brightness or contrast is adjusted, which means that a good match for a target block is found within the target's own class.
+3. The image is then processed as 4 x 4 pixel target blocks. For each target block, the catalog candidates of the block's own class are scanned outward from the block's position, as nearby image content is the most likely to contain a good match. Every candidate gets a brightness adjustment (computed from the pixel sums), after which the pixel-wise squared difference is accumulated. A candidate is abandoned as soon as its difference exceeds the best one found so far, and the whole scan ends early if the difference is below the allowed error threshold.
+4. The best match is stored as the candidate block's coordinates, transform index and brightness adjustment.
+
+Contrast is not stored per block: all copies are scaled towards the average with a fixed 75% contrast factor (```CONTRAST``` in ```lib/constants.js```). This is what makes the decoding iteration converge.
+
+A ```.fractal``` file is simply a small header (magic marker, image width and height) followed by the matches of the three channels, each packed into 32 bits: 9 bits of brightness (-255...255), 3 bits of transform index and 10 + 10 bits of block coordinates (scaled down by 8).
+
+### Decoding
+
+The stored transformations form a contractive mapping: applying them to *any* image produces an image that is closer to the encoded one. Decoding is simply repeating that until the changes become invisible:
+
+1. Start with a seed image - blank, random pixels, anything goes.
+2. For every 4 x 4 block of the target image, copy its stored 8 x 8 source block from the previous iteration's image, scaled down, transformed, and adjusted with the stored brightness and the fixed contrast factor.
+3. Swap the two image buffers and repeat - 16 iterations by default, though a recognizable image emerges after just a few (see the visualization above).
+
+As decoding only needs a single pass over the pixels per iteration, it runs several orders of magnitude faster than encoding - the asymmetry that fractal compression is famous for.
