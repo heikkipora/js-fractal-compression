@@ -62,7 +62,7 @@ The idea of fractal compression is to express every small block of an image as a
 
 ### Encoding
 
-Each color channel (red, green, blue) is encoded separately with the same algorithm:
+Each color channel (red, green, blue) is encoded with the same algorithm, in parallel worker threads (one per channel):
 
 1. A catalog of candidate blocks is built first: every 8 x 8 pixel block aligned on an 8-pixel grid is scaled down to 4 x 4 (by averaging 2 x 2 pixel cells) in six variants - flipped horizontally, flipped vertically, as-is, and rotated by 90°, 180° and 270°.
 2. Every variant is classified by the brightness ranking of its four quadrants into one of 24 classes. The ranking doesn't change when brightness or contrast is adjusted, which means that a good match for a target block is found within the target's own class.
