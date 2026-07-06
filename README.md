@@ -6,12 +6,12 @@ Fractal compression was a thing during the 1990s but industry interest later fad
 
 I was intrigued by the beauty of the idea (of fractal compression) then and still am. Having implemented a fractal encoder/decoder in MC680x0 assembler during mid-1990s for some Amiga demoscene stuff I had some faint memories of how one should work. Not having that source code around anymore I wanted to give it a try with my current main language (ES6) - out of my head without a reference implementation :)
 
-A weekend of coding resulted in this simplistic implementation which still produces visually appealling results.
+A weekend of coding resulted in this simplistic implementation which still produces visually appealing results.
 Note that I have prioritized performance and encoding efficiency over code beauty (such as functional paradigms).
 
 A nice writeup of a similar implementation (in python & numpy) by *pvigier* is here: https://pvigier.github.io/2018/05/14/fractal-image-compression.html
 
-![Run tests](https://github.com/heikkipora/js-fractal-compression/workflows/Run%20tests/badge.svg)
+![Run tests](https://github.com/heikkipora/js-fractal-compression/actions/workflows/test.yml/badge.svg)
 
 ## Example images
 
@@ -47,7 +47,7 @@ The table below illustrates the twelve first iterations decoding ```examples/hel
 
 ```npm install```
 
-## Test execution with mocha
+## Test execution with the Node.js test runner
 
 ```npm test```
 

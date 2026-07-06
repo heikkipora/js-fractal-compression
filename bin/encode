@@ -12,7 +12,10 @@ if (!inFile || !outFile) {
 
 encodeFileToFile(inFile, outFile, 4)
   .then(() => console.log('Completed'))
-  .catch(console.error)
+  .catch(err => {
+    console.error(err)
+    process.exitCode = 1
+  })
 
 async function encodeFileToFile(srcPath, dstPath, allowedError) {
   const {r, g, b, width, height} = await fileToPixels(srcPath)

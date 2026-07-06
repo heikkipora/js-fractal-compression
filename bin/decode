@@ -12,7 +12,10 @@ if (!inFile || !outFile) {
 
 decodeFileToFile(inFile, outFile, Number(iterations || 16))
   .then(() => console.log('Completed'))
-  .catch(console.error)
+  .catch(err => {
+    console.error(err)
+    process.exitCode = 1
+  })
 
 async function decodeFileToFile(srcPath, dstPath, iterations) {
   const {r, g, b, width, height} = await readFile(srcPath)
