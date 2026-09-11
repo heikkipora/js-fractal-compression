@@ -7,7 +7,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "sharp": "0.35.3"
+    "sharp": "0.35.4"
   },
   "type": "module",
   "engines": {
